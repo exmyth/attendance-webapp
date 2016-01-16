@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.exmyth.attendance.model.Account;
@@ -15,8 +16,8 @@ import com.exmyth.attendance.service.AccountService;
 public class AccountController {
 	@Autowired
 	private AccountService accountService;
-	@RequestMapping("/home")
-	public String home(long id,HttpServletRequest request) {
+	@RequestMapping("/home/{id}")
+	public String home(@PathVariable long id,HttpServletRequest request) {
 		Account account = accountService.getAccountById(id);
 		request.setAttribute("account", account);
 		return "home";
