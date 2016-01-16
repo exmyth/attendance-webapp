@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.uniubi.attendance.dao.AccountMapper" >
-  <resultMap id="BaseResultMap" type="com.uniubi.attendance.model.Account" >
+<mapper namespace="com.exmyth.attendance.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.exmyth.attendance.model.Account" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
     delete from account
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.uniubi.attendance.model.Account" >
+  <insert id="insert" parameterType="com.exmyth.attendance.model.Account" >
     insert into account (id, nickname, username, 
       password, email, birthdate, 
       gender, age, status
@@ -35,7 +35,7 @@
       #{gender,jdbcType=TINYINT}, #{age,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.uniubi.attendance.model.Account" >
+  <insert id="insertSelective" parameterType="com.exmyth.attendance.model.Account" >
     insert into account
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.uniubi.attendance.model.Account" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.exmyth.attendance.model.Account" >
     update account
     <set >
       <if test="nickname != null" >
@@ -126,7 +126,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.uniubi.attendance.model.Account" >
+  <update id="updateByPrimaryKey" parameterType="com.exmyth.attendance.model.Account" >
     update account
     set nickname = #{nickname,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},

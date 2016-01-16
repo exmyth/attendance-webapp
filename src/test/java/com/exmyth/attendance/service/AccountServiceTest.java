@@ -1,24 +1,23 @@
 package com.exmyth.attendance.service;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.exmyth.attendance.model.Account;
-import com.exmyth.attendance.service.AccountService;
 
-public class AccountServiceTest {
-	
+@RunWith(SpringJUnit4ClassRunner.class)//extends SpringJUnit4ClassRunner
+@ContextConfiguration(locations={"classpath:spring.xml","classpath:spring-mybatis.xml"})
+public class AccountServiceTest{
 	private AccountService accountService;
-
-	@Before
-	public void before(){
-		ApplicationContext context = 
-				new ClassPathXmlApplicationContext(new String[]{"spring.xml","spring-mybatis.xml"});
-		accountService = (AccountService) context.getBean("accountService");
-	}
 	
+	@Autowired
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
+	}
+
 	@Test
 	public void test1(){
 		Account account = accountService.getAccountById(1);
