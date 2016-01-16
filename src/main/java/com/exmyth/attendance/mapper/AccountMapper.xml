@@ -10,7 +10,7 @@
     <result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
     <result column="gender" property="gender" jdbcType="TINYINT" />
     <result column="age" property="age" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, nickname, username, password, email, birthdate, gender, age, status
