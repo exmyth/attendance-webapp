@@ -8,18 +8,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.exmyth.attendance.model.Account;
 
-@RunWith(SpringJUnit4ClassRunner.class)//extends SpringJUnit4ClassRunner
-@ContextConfiguration(locations={"classpath:spring.xml","classpath:spring-mybatis.xml"})
-public class AccountServiceTest{
-	private AccountService accountService;
-	
+@RunWith(SpringJUnit4ClassRunner.class) // extends SpringJUnit4ClassRunner
+@ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-mybatis.xml" })
+public class AccountServiceTest {
 	@Autowired
-	public void setAccountService(AccountService accountService) {
-		this.accountService = accountService;
-	}
+	private AccountService accountService;
 
 	@Test
-	public void test1(){
+	public void test1() {
 		Account account = accountService.getAccountById(1);
 		System.out.println(account.getNickname());
 	}
