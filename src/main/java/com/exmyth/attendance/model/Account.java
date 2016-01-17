@@ -1,6 +1,7 @@
 package com.exmyth.attendance.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Account {
     private Long id;
@@ -19,7 +20,9 @@ public class Account {
 
     private Integer age;
 
-    private String status;
+    private Byte status;
+    
+    private List<AccountRole> accountRoles;
 
     public Long getId() {
         return id;
@@ -85,11 +88,19 @@ public class Account {
         this.age = age;
     }
 
-    public String getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Byte status) {
+        this.status = status;
     }
+
+	public List<AccountRole> getAccountRoles() {
+		return accountRoles;
+	}
+
+	public void setAccountRoles(List<AccountRole> accountRoles) {
+		this.accountRoles = accountRoles;
+	}
 }

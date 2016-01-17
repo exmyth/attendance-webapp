@@ -12,9 +12,25 @@
     <result column="age" property="age" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     id, nickname, username, password, email, birthdate, gender, age, status
   </sql>
+  
+  <select id="selectAccountRole" parameterType="java.lang.Long" resultType="com.exmyth.attendance.model.AccountRole">
+	  	SELECT
+		account_role.id,
+		account_role.account_id,
+		account_role.role_id
+	FROM
+		account_role
+	WHERE account_role.account_id=#{id,jdbcType=BIGINT}
+  </select>
+  
+  <resultMap id="accountResultMap" type="com.exmyth.attendance.model.Account" extends="BaseResultMap">
+  	<collection property="accountRoles" column="id" javaType="list" select="selectAccountRole"></collection>
+  </resultMap>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -138,4 +154,8 @@
       status = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getAll" resultMap="accountResultMap">
+  	SELECT * FROM account
+  </select>
 </mapper>

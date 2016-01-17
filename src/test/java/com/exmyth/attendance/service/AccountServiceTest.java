@@ -1,5 +1,7 @@
 package com.exmyth.attendance.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +24,14 @@ public class AccountServiceTest {
 	private AccountService accountService;
 
 	@Test
-	public void test1() {
+	public void testGetAccountById() {
 		Account account = accountService.getAccountById(1);
 		logger.info(JSON.toJSONStringWithDateFormat(account,"yyyy-MM-dd HH:mm:dd"));
+	}
+	
+	@Test
+	public void testGetAll() {
+		List<Account> all = accountService.getAll();
+		logger.info(JSON.toJSONStringWithDateFormat(all,"yyyy-MM-dd HH:mm:dd"));
 	}
 }

@@ -1,5 +1,7 @@
 package com.exmyth.attendance.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,14 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountMapper accountMapper;
-	
+
 	@Override
 	public Account getAccountById(long id) {
 		return accountMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Account> getAll() {
+		return accountMapper.getAll();
 	}
 }
