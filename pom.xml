@@ -85,6 +85,27 @@
 		    <version>3.1.0</version>
 		    <scope>provided</scope>
 		</dependency>
+		<!-- javax.websocket使用tomcat实现 -->
+		<!-- 
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+		</dependency>
+		 -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-websocket</artifactId>
+			<version>9.0.0.M1</version>
+		</dependency>
+		<!-- 此包没有WsContextListener类,改用tomcat-websocket -->
+		<!-- 
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-websocket-api</artifactId>
+			<version>9.0.0.M1</version>
+		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -124,7 +145,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
 		</dependency>
 	</dependencies>
 	<build>

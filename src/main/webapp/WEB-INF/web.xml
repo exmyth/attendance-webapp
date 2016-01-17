@@ -26,6 +26,10 @@
 		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+		<description>websocket</description>
+		<listener-class>org.apache.tomcat.websocket.server.WsContextListener</listener-class>
+	</listener>
 	<!-- 防止spring内存溢出监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
