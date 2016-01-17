@@ -12,7 +12,7 @@
 		<description>字符集过滤器</description>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<!-- <async-supported>true</async-supported> -->
+		<async-supported>true</async-supported>
 		<init-param>
 			<description>字符集编码</description>
 			<param-name>encoding</param-name>
@@ -23,6 +23,15 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<filter>
+        <filter-name>customFilter</filter-name>
+        <filter-class>com.exmyth.attendance.filter.CustomFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+    <filter-mapping>
+        <filter-name>customFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 	<listener>
 		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

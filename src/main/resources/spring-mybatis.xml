@@ -8,27 +8,34 @@ http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 ">
 
+	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+        <property name="statementExecutableSqlLogEnable" value="true" />
+    </bean>
+    
 	<!-- JNDI方式配置数据源 -->
 	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> <property name="jndiName" value="${jndiName}"></property> </bean> -->
-
 	<!-- 配置数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="url" value="${jdbc_url}" />
 		<property name="username" value="${jdbc_username}" />
 		<property name="password" value="${jdbc_password}" />
 
+		<property name="driverClassName" value="${driverClassName}" />
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="0" />
+		<property name="initialSize" value="3" />
 		<!-- 连接池最大使用连接数量 -->
-		<property name="maxActive" value="20" />
+		<property name="maxActive" value="50" />
 		<!-- 连接池最大空闲 -->
 		<property name="maxIdle" value="20" />
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="0" />
+		<property name="minIdle" value="1" />
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
 
-		<!-- <property name="poolPreparedStatements" value="true" /> <property name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
+		<!--
+		<property name="poolPreparedStatements" value="true" /> 
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+		 -->
 
 		<property name="validationQuery" value="${validationQuery}" />
 		<property name="testOnBorrow" value="false" />
@@ -38,7 +45,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="25200000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
 
 		<!-- 打开removeAbandoned功能 -->
 		<property name="removeAbandoned" value="true" />
@@ -48,16 +55,35 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		<property name="logAbandoned" value="true" />
 
 		<!-- 监控数据库 -->
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
 		<!-- <property name="filters" value="stat" /> -->
 		<property name="filters" value="mergeStat" />
+		<!-- 配置输出日志输出可执行的SQL -->
+        <property name="proxyFilters">
+	        <list>
+	            <ref bean="log-filter"/>
+	        </list>
+	    </property>
 	</bean>
 
 	<!-- myBatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<!-- MyBatis 的 XML 配置文件路径 -->
+        <property name="configLocation" value="classpath:sqlMapConfig.xml" />
+        <!-- 扫描自动生成的xml文件 --><!-- Mybatis XML映射文件 -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath:com/exmyth/attendance/mapper/*.xml" />
 	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+    
+    <!-- 扫描mybatisGenerator 自动生成的  所有接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+        <property name="basePackage" value="com.exmyth.attendance.dao" ></property>
+    </bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.exmyth.attendance.dao" />
