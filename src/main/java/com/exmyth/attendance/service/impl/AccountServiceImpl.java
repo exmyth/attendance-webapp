@@ -12,8 +12,12 @@ import com.exmyth.attendance.service.AccountService;
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
 
-	@Autowired
 	private AccountMapper accountMapper;
+
+	@Autowired
+	public void setAccountMapper(AccountMapper accountMapper) {
+		this.accountMapper = accountMapper;
+	}
 
 	@Override
 	public Account getAccountById(long id) {
@@ -23,5 +27,10 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<Account> getAll() {
 		return accountMapper.getAll();
+	}
+
+	@Override
+	public List<Account> getAll2() {
+		return accountMapper.getAll2();
 	}
 }

@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.exmyth.attendance.model.Account;
 
 @RunWith(SpringJUnit4ClassRunner.class) // extends SpringJUnit4ClassRunner
-@ContextConfiguration(locations = { "classpath:spring.xml", "classpath:spring-mybatis.xml" })
+@ContextConfiguration(locations = { "classpath*:/spring.xml", "classpath*:/spring-mybatis.xml" })
 public class AccountServiceTest {
 	/**
 	 * Logger for this class
@@ -32,6 +32,12 @@ public class AccountServiceTest {
 	@Test
 	public void testGetAll() {
 		List<Account> all = accountService.getAll();
+		logger.info(JSON.toJSONStringWithDateFormat(all,"yyyy-MM-dd HH:mm:dd"));
+	}
+	
+	@Test
+	public void testGetAll2() {
+		List<Account> all = accountService.getAll2();
 		logger.info(JSON.toJSONStringWithDateFormat(all,"yyyy-MM-dd HH:mm:dd"));
 	}
 }

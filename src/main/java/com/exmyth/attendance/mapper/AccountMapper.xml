@@ -17,20 +17,6 @@
     id, nickname, username, password, email, birthdate, gender, age, status
   </sql>
   
-  <select id="selectAccountRole" parameterType="java.lang.Long" resultType="com.exmyth.attendance.model.AccountRole">
-	  	SELECT
-		account_role.id,
-		account_role.account_id,
-		account_role.role_id
-	FROM
-		account_role
-	WHERE account_role.account_id=#{id,jdbcType=BIGINT}
-  </select>
-  
-  <resultMap id="accountResultMap" type="com.exmyth.attendance.model.Account" extends="BaseResultMap">
-  	<collection property="accountRoles" column="id" javaType="list" select="selectAccountRole"></collection>
-  </resultMap>
-  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -155,7 +141,46 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   
+  <select id="selectAccountRole" parameterType="java.lang.Long" resultType="com.exmyth.attendance.model.AccountRole">
+	  	SELECT
+		account_role.id,
+		account_role.account_id,
+		account_role.role_id
+	FROM
+		account_role
+	WHERE account_role.account_id=#{id,jdbcType=BIGINT}
+  </select>
+  
+  <resultMap id="accountResultMap" type="com.exmyth.attendance.model.Account" extends="BaseResultMap">
+  	<collection property="accountRoles" column="id" javaType="list" select="selectAccountRole"></collection>
+  </resultMap>
+  
   <select id="getAll" resultMap="accountResultMap">
   	SELECT * FROM account
+  </select>
+  <resultMap id="accountResultMap2" type="com.exmyth.attendance.model.Account" extends="BaseResultMap">
+  	<collection property="accountRoles" javaType="list" ofType="com.exmyth.attendance.model.AccountRole">
+  		<id column="account_role_id" property="id"/>
+	  	<result column="account_id" property="accountId"/>
+	  	<result column="role_id" property="roleId"/>
+  	</collection>
+  </resultMap>
+  <select id="getAll2" resultMap="accountResultMap2">
+  	SELECT
+		account.id,
+		account.nickname,
+		account.username,
+		account.`password`,
+		account.email,
+		account.birthdate,
+		account.gender,
+		account.age,
+		account.`status`,
+		account_role.id AS account_role_id,
+		account_role.account_id,
+		account_role.role_id
+	FROM
+		account
+	LEFT JOIN account_role ON account_role.account_id = account.id
   </select>
 </mapper>
