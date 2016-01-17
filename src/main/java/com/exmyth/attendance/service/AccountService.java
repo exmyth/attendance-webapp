@@ -8,4 +8,5 @@ public interface AccountService {
 	public Account getAccountById(long id);
 	public List<Account> getAll();
 	public List<Account> getAll2();
+	public List<Account> getAll3();
 }

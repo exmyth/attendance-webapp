@@ -33,4 +33,9 @@ public class AccountServiceImpl implements AccountService {
 	public List<Account> getAll2() {
 		return accountMapper.getAll2();
 	}
+	
+	@Override
+	public List<Account> getAll3() {
+		return accountMapper.getAll3();
+	}
 }

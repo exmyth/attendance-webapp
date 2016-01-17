@@ -40,4 +40,10 @@ public class AccountServiceTest {
 		List<Account> all = accountService.getAll2();
 		logger.info(JSON.toJSONStringWithDateFormat(all,"yyyy-MM-dd HH:mm:dd"));
 	}
+	
+	@Test
+	public void testGetAll3() {
+		List<Account> all = accountService.getAll3();
+		logger.info(JSON.toJSONStringWithDateFormat(all,"yyyy-MM-dd HH:mm:dd"));
+	}
 }

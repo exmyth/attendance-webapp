@@ -183,4 +183,35 @@
 		account
 	LEFT JOIN account_role ON account_role.account_id = account.id
   </select>
+  <resultMap id="accountResultMap3" type="com.exmyth.attendance.model.Account" extends="BaseResultMap">
+  	<collection property="accountRoles" javaType="list" ofType="com.exmyth.attendance.model.AccountRole">
+  		<id column="account_role_id" property="id"/>
+	  	<result column="account_id" property="accountId"/>
+	  	<result column="role_id" property="roleId"/>
+	  	<association property="role" javaType="com.exmyth.attendance.model.Role">
+	  		<id column="role_id" property="id"/>
+	  		<result column="title" property="title"/>
+	  	</association>
+  	</collection>
+  </resultMap>
+  <select id="getAll3" resultMap="accountResultMap3">
+  	SELECT
+		account.id,
+		account.nickname,
+		account.username,
+		account.`password`,
+		account.email,
+		account.birthdate,
+		account.gender,
+		account.age,
+		account.`status`,
+		account_role.id AS account_role_id,
+		account_role.account_id,
+		account_role.role_id,
+		role.title
+	FROM
+		account
+	LEFT JOIN account_role ON account_role.account_id = account.id
+	LEFT JOIN role ON account_role.role_id = role.id
+  </select>
 </mapper>

@@ -6,6 +6,8 @@ public class AccountRole {
     private Long accountId;
 
     private Long roleId;
+    
+    private Role role;
 
     public Long getId() {
         return id;
@@ -30,4 +32,12 @@ public class AccountRole {
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 }
