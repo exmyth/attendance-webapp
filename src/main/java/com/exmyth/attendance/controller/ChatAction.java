@@ -9,10 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.exmyth.attendance.model.ResultData;
   
 @Controller
-@RequestMapping
+@RequestMapping("/chat")
 public class ChatAction {
   
     private static final Log log = LogFactory.getLog(ChatAction.class);
+    
+    @RequestMapping("/")
+    public String echo2(){
+    	return "echo2";
+    }
+    
   
     @MessageMapping("/hello")
     @SendTo("/tweet/fuck")

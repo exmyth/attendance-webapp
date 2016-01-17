@@ -1,11 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<script type="text/javascript" src="./lib/sockjs-1.0.3.min.js"></script> 
-<script type="text/javascript" src="./lib/stomp.min.js"></script> 
+<!-- https://github.com/jmesnil/stomp-websocket -->
+<script type="text/javascript" src="pages/lib/stomp-2.3.3.js"></script> 
+<!-- https://github.com/sockjs/sockjs-client -->
+<script type="text/javascript" src="pages/lib/sockjs-1.0.3.js"></script>
+<!-- 
+<script type="text/javascript" src="http://cdn.jsdelivr.net/sockjs/1.0.3/sockjs.min.js"></script>
+ --> 
 <!-- 为了方便起见，js我就直接这么放这儿了 -->
 <script>
         var stompClient = null;
@@ -19,7 +28,7 @@
         }
              
         function connect() {
-            var socket = new SockJS('http://localhost:8080/attendance-webapp/hello');
+        	var socket = new SockJS('/webapp/hello');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function(frame) {
                 setConnected(true);
