@@ -22,4 +22,6 @@ public interface AccountMapper {
 	List<Account> getAll2();
 
 	List<Account> getAll3();
+
+	List<Account> getAll4();
 }

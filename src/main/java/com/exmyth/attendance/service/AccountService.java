@@ -9,4 +9,5 @@ public interface AccountService {
 	public List<Account> getAll();
 	public List<Account> getAll2();
 	public List<Account> getAll3();
+	public List<Account> getAll4();
 }

@@ -24,6 +24,8 @@ public class Account {
     
     private List<AccountRole> accountRoles;
 
+    private List<Role> roles;
+
     public Long getId() {
         return id;
     }
@@ -102,5 +104,13 @@ public class Account {
 
 	public void setAccountRoles(List<AccountRole> accountRoles) {
 		this.accountRoles = accountRoles;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 }
